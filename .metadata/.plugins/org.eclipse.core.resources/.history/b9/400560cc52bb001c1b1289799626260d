@@ -1,0 +1,24 @@
+package com.desarrollo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.desarrollo.model.CuentasModel;
+import com.desarrollo.repository.CuentasRepository;
+
+@Service
+public class CuentaService {
+	
+	@Autowired
+	private CuentasRepository cuentaRepo;
+
+	public List<CuentasModel> findAll(){
+		List<CuentasModel> lista = new ArrayList<>();
+		lista = cuentaRepo.findAll();
+		return lista;
+	}
+	
+}

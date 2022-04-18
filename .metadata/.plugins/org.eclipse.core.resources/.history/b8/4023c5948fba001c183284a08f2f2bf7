@@ -1,0 +1,19 @@
+package com.desarrollo.controller;
+
+public class CuentasController {
+	@GetMapping(value = "/cuentas")
+	public ResponseEntity<String> cuentas() {
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+		try {
+			//jsonResponse = gson.toJson(iCuenta.findAll());
+			jsonResponse = "HOLA MUNDO";
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+		} catch (Exception ex) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+	}
+}

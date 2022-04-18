@@ -1,0 +1,27 @@
+package com.desarrollo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.desarrollo.model.ProductoModel;
+import com.desarrollo.repository.ProductoRepository;
+
+@Service
+public class ProductoService {
+	
+	@Autowired
+	private ProductoRepository productoRepo;
+
+	public List<ProductoModel> findAll(){
+		List<ProductoModel> lista = new ArrayList<>();
+		lista = productoRepo.findAll();
+		return lista;
+	}
+	
+	public List<ProductoModel>  findById(Integer id){
+		List<ProductoModel> lista = new ArrayList<>();
+		lista = productoRepo.findById(id);
+		return lista;
+	}
+}

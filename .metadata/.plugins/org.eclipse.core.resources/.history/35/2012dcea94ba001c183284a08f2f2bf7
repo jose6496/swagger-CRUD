@@ -1,0 +1,6 @@
+package com.desarrollo.repository;
+
+
+public interface CuentasRepository extends JpaRepository<CuentasModel, Integer>{
+
+}

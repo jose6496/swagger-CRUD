@@ -1,0 +1,5 @@
+package com.desarrollo.repository;
+
+public interface CuentasRepository {
+
+}

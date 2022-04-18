@@ -1,0 +1,45 @@
+package com.desarrollo.model;
+
+	import javax.persistence.Column;
+	import javax.persistence.Entity;
+	import javax.persistence.GeneratedValue;
+	import javax.persistence.GenerationType;
+	import javax.persistence.Id;
+	import javax.persistence.Table;
+
+	@Entity
+	@Table (name="cuentas")
+	public class CuentasModel {
+		@Id
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
+		private int id;
+		@Column(name = "cuenta", length = 10)
+		private String cuenta;
+		@Column(name = "titular", length = 100)
+		private String titular;
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public String getCuenta() {
+			return cuenta;
+		}
+
+		public void setCuenta(String cuenta) {
+			this.cuenta = cuenta;
+		}
+
+		public String getTitular() {
+			return titular;
+		}
+
+		public void setTitular(String titular) {
+			this.titular = titular;
+		}
+
+	}

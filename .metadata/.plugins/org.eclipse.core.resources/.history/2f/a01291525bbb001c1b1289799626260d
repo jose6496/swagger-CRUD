@@ -1,0 +1,115 @@
+package com.desarrollo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.desarrollo.model.ProductoModel;
+import com.desarrollo.service.ProductoService;
+import com.google.gson.Gson;
+
+@CrossOrigin(origins = "*")
+@Controller
+public class ProductosController {
+	
+	@Autowired
+	private ProductoService ProductoServ;
+	
+	@GetMapping(value = "/productos")
+	public ResponseEntity<String> productos() {
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+		try {
+			jsonResponse = gson.toJson(ProductoServ.findAll());
+			//jsonResponse = "HOLA MUNDO";
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+		} catch (Exception ex) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+	}
+	
+	@GetMapping(value = "/productos/{id}")
+	public ResponseEntity<String> cuentasIds(@PathVariable("id") Integer id) {
+
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+
+		try {
+			jsonResponse = gson.toJson(ProductoServ.findById(id));
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+		} catch (Exception ex) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+	}
+
+	@PostMapping(value = "/productos")
+	public ResponseEntity<String> CuentaInsert(@RequestBody String json) {
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+		ProductoModel producto = gson.fromJson(json, ProductoModel.class);
+		try {
+			jsonResponse = gson.toJson(ProductoServ.save(producto));
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.CREATED);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+	}
+
+	@PutMapping(value = "/productos/{id}")
+	public ResponseEntity<String> cuentasPut(@PathVariable("id") Integer id, @RequestBody String json) {
+
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+		ProductoModel producto = gson.fromJson(json, ProductoModel.class);
+		producto.setId_producto(id);
+		try {
+			jsonResponse = gson.toJson(ProductoServ.save(producto)));
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+		} catch (Exception ex) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+
+	}
+
+	@DeleteMapping(value = "/productos/{id}")
+	public ResponseEntity<String> cuentasDelete(@PathVariable("id") Integer id) {
+
+		ResponseEntity<String> response;
+		Gson gson = new Gson();
+		String jsonResponse;
+		try {
+			iCuenta.deleteById(id);
+	
+			jsonResponse = gson.toJson(respuesta);
+
+			response = new ResponseEntity<>(jsonResponse, HttpStatus.OK);
+		} catch (Exception ex) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+		}
+		return response;
+
+	}
+}

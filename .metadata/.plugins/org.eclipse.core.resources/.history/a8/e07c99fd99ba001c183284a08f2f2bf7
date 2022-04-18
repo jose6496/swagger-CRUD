@@ -1,0 +1,24 @@
+package com.desarrollo.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "productos")
+public class CategoriaModel {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id_categoria;
+	@Column(name = "nombre")
+	private String nombre;
+	@Column(name = "precio")
+	private Double precio;
+	@Column(name = "marca")
+	private String marca;
+
+}
+
